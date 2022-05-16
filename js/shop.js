@@ -64,23 +64,40 @@ var cart = [];
 var total = 0;
 
 // Exercise 1
-function buy(id) {
+function buy(referenceId) {
   // 1. Loop for to the array products to get the item to add to cart
+
+  let productToAdd;
+
+  for ( let i = 0; i < products.length; i++ ) {
+
+    if ( referenceId == products[i].id ) {
+      productToAdd = products[i];
+    }
+  }
   // 2. Add found product to the cartList array
+  
+  cartList.push(productToAdd);
+  console.log(cartList);
+  
 }
 
 // Exercise 2
-function cleanCart() {}
+function cleanCart() {
+  
+}
 
 // Exercise 3
 function calculateTotal() {
   // Calculate total price of the cart using the "cartList" array
+
 }
 
 // Exercise 4
 function generateCart() {
   // Using the "cartlist" array that contains all the items in the shopping cart,
   // generate the "cart" array that does not contain repeated items, instead each item of this array "cart" shows the quantity of product.
+
 }
 
 // Exercise 5
