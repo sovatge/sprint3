@@ -85,6 +85,8 @@ function buy(referenceId) {
 // Exercise 2
 function cleanCart() {
   
+  cartList = [];
+  console.log(cartList);
 }
 
 // Exercise 3
