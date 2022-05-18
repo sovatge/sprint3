@@ -147,12 +147,28 @@ function generateCart(arrayToOptimize) {
     }
   }
 
+  applyPromotionsCart(cart);
   console.log(cart);
 }
 
 // Exercise 5
-function applyPromotionsCart() {
+function applyPromotionsCart(arrayForPromo) {
   // Apply promotions to each item in the array "cart"
+
+  for ( let i = 0; i < arrayForPromo.length; i++){
+
+    if (( arrayForPromo[i].id === 1 ) && ( arrayForPromo[i].quantity >= 3 )){
+
+      let newPriceWithDiscount = 10;
+      arrayForPromo[i].subtotalWithDiscount = newPriceWithDiscount * arrayForPromo[i].quantity;
+
+    } else if (( arrayForPromo[i].id === 3 ) && ( arrayForPromo[i].quantity >= 10 )){
+
+        let newPriceWithDiscount = (arrayForPromo[i].price * ( 2 / 3 )).toFixed(2);
+        arrayForPromo[i].subtotalWithDiscount = newPriceWithDiscount * arrayForPromo[i].quantity;
+
+    }
+  }
 }
 
 // ** Nivell II **
