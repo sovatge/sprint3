@@ -177,9 +177,7 @@ function printCart() {
   
 }
 
-function open_modal() {
-  console.log("Open Modal");
-}
+
 
 // ** Nivell II **
 
@@ -194,4 +192,9 @@ function addToCart(id) {
 function removeFromCart(id) {
   // 1. Loop for to the array products to get the item to add to cart
   // 2. Add found product to the cartList array
+}
+
+function open_modal() {
+  console.log("Open Modal");
+  printCart();
 }
