@@ -104,11 +104,50 @@ function calculateTotal() {
 }
 
 // Exercise 4
-function generateCart() {
+function generateCart(arrayToOptimize) {
   // Using the "cartlist" array that contains all the items in the shopping cart,
   // generate the "cart" array that does not contain repeated items, instead each item of this array "cart" shows the quantity of product.
 
+  var cart = [];
+  let productOnCart;
 
+  for ( let i = 0; i < arrayToOptimize.length; i++){
+
+    if ( cart.length === 0 ) {
+
+      arrayToOptimize[i].quantity = 1;
+      arrayToOptimize[i].subtotal = arrayToOptimize[i].price * arrayToOptimize[i].quantity;
+      cart.push(arrayToOptimize[i]);
+
+    } else {
+
+      loop2:
+      for ( let j = 0; j < cart.length; j++){
+
+        if ( cart[j].id === arrayToOptimize[i].id ){
+
+          productOnCart = true;
+          
+          cart[j].quantity += 1;
+          cart[j].subtotal = cart[j].price * cart[j].quantity;
+          break loop2;
+
+        } else {
+
+            productOnCart = false;
+        }
+      }
+
+      if ( productOnCart === false ) {
+
+        arrayToOptimize[i].quantity = 1;
+        arrayToOptimize[i].subtotal = arrayToOptimize[i].price * arrayToOptimize[i].quantity;
+        cart.push(arrayToOptimize[i]);
+      }
+    }
+  }
+
+  console.log(cart);
 }
 
 // Exercise 5
