@@ -171,26 +171,27 @@ function applyPromotionsCart(arrayForPromo) {
   }
 }
 
+// Exercise 6
+function printCart() {
+  // Fill the shopping cart modal manipulating the shopping cart dom
+  
+}
+
+function open_modal() {
+  console.log("Open Modal");
+}
+
 // ** Nivell II **
 
-// Exercise 7
+// Exercise 8
 function addToCart(id) {
   // Refactor previous code in order to simplify it
   // 1. Loop for to the array products to get the item to add to cart
   // 2. Add found product to the cart array or update its quantity in case it has been added previously.
 }
 
-// Exercise 8
+// Exercise 9
 function removeFromCart(id) {
   // 1. Loop for to the array products to get the item to add to cart
   // 2. Add found product to the cartList array
-}
-
-// Exercise 9
-function printCart() {
-  // Fill the shopping cart modal manipulating the shopping cart dom
-}
-
-function open_modal() {
-  console.log("Open Modal");
 }
