@@ -59,9 +59,9 @@ var products = [
 var cartList = [];
 
 // Improved version of cartList. Cart is an array of products (objects), but each one has a quantity field to define its quantity, so these products are not repeated.
-var cart = [];
+//var cart = [];
 
-var total = 0;
+//var total = 0;
 
 // Exercise 1
 function buy(referenceId) {
@@ -108,7 +108,7 @@ function generateCart(arrayToOptimize) {
   // Using the "cartlist" array that contains all the items in the shopping cart,
   // generate the "cart" array that does not contain repeated items, instead each item of this array "cart" shows the quantity of product.
 
-  var cart = [];
+  //var cart = [];
   let productOnCart;
 
   for ( let i = 0; i < arrayToOptimize.length; i++){
