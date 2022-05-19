@@ -59,9 +59,9 @@ var products = [
 var cartList = [];
 
 // Improved version of cartList. Cart is an array of products (objects), but each one has a quantity field to define its quantity, so these products are not repeated.
-//var cart = [];
+var cart = [];
 
-//var total = 0;
+var total = 0;
 
 // Exercise 1
 function buy(referenceId) {
@@ -108,7 +108,7 @@ function generateCart(arrayToOptimize) {
   // Using the "cartlist" array that contains all the items in the shopping cart,
   // generate the "cart" array that does not contain repeated items, instead each item of this array "cart" shows the quantity of product.
 
-  //var cart = [];
+  cart = [];
   let productOnCart;
 
   for ( let i = 0; i < arrayToOptimize.length; i++){
@@ -159,13 +159,13 @@ function applyPromotionsCart(arrayForPromo) {
 
     if (( arrayForPromo[i].id === 1 ) && ( arrayForPromo[i].quantity >= 3 )){
 
-      let newPriceWithDiscount = 10;
-      arrayForPromo[i].subtotalWithDiscount = newPriceWithDiscount * arrayForPromo[i].quantity;
+      let newPriceWithDiscountId1 = 10;
+      arrayForPromo[i].subtotalWithDiscount = newPriceWithDiscountId1 * arrayForPromo[i].quantity;
 
     } else if (( arrayForPromo[i].id === 3 ) && ( arrayForPromo[i].quantity >= 10 )){
 
-        let newPriceWithDiscount = (arrayForPromo[i].price * ( 2 / 3 )).toFixed(2);
-        arrayForPromo[i].subtotalWithDiscount = newPriceWithDiscount * arrayForPromo[i].quantity;
+        let newPriceWithDiscountId3 = (arrayForPromo[i].price * ( 2 / 3 )).toFixed(2);
+        arrayForPromo[i].subtotalWithDiscount = newPriceWithDiscountId3 * arrayForPromo[i].quantity;
 
     }
   }
@@ -173,10 +173,25 @@ function applyPromotionsCart(arrayForPromo) {
 
 // Exercise 6
 function printCart() {
-  // Fill the shopping cart modal manipulating the shopping cart dom
-  
-}
 
+  // Fill the shopping cart modal manipulating the shopping cart dom
+
+  let productsTable = '';
+  let priceTotalProducts = 0;
+  let totalImportCart = 0;
+
+  for ( let i = 0; i < cart.length; i++) {
+
+    ( cart[i].subtotalWithDiscount ) ? ( priceTotalProducts = cart[i].subtotalWithDiscount ) : ( priceTotalProducts = cart[i].subtotal );
+
+    productsTable += `<tr><th scope='row'>${cart[i].name}</th><td>$${cart[i].price}</td><td>${cart[i].quantity}</td><td>$${priceTotalProducts}</td></tr>`
+
+    totalImportCart += priceTotalProducts;
+  }
+
+  document.getElementById('cart_list').innerHTML = productsTable;
+  document.getElementById('total_price').innerHTML = totalImportCart;
+}
 
 
 // ** Nivell II **
@@ -186,12 +201,28 @@ function addToCart(id) {
   // Refactor previous code in order to simplify it
   // 1. Loop for to the array products to get the item to add to cart
   // 2. Add found product to the cart array or update its quantity in case it has been added previously.
+
+  /* Repassant el programa, es poden mantenir les funcionalitats simplificant el codi: això es diu fer un refactor.
+
+  Podem deixar d'usar buy() i generateCart() (no els esborris, per a facilitar la correcció), per a generar el carretó en una única funció addToCart().
+
+  A vegades és una mica tediós refactoritzar codi, ja que hauràs de modificar també calculateSubtotals, però s'ha d'anar netejant codi perquè sigui més mantenible.
+
+  Ajuda: Tingues en compte que has de validar si el producte ja existeix a l'array cart, per actualitzar la seva quantitat, o afegir-lo en cas que encara no formi part d'aquest array cart. */
+
+
 }
 
 // Exercise 9
 function removeFromCart(id) {
-  // 1. Loop for to the array products to get the item to add to cart
-  // 2. Add found product to the cartList array
+  /* Has de completar la funció removeFromCart(), la qual rep l'id del producte per al qual es deu decrementar la seva quantitat en una unitat.
+
+  Tingues en compte que si la quantitat del producte a decrementar és 1, has d'eliminar-lo del carret, no passar la seva quantitat a 0.
+
+  Recordar actualitzar les promocions. */
+
+
+
 }
 
 function open_modal() {
