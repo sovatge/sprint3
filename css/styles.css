@@ -151,6 +151,12 @@ h5, .h5 {
 h6, .h6 {
   font-size: 1rem;
 }
+header {
+  background-image: url('./images/background-header.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
 
 p {
   margin-top: 0;
