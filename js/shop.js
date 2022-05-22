@@ -95,20 +95,25 @@ var total = 0;
 } */
 
 // Exercise 5
-function applyPromotionsCart(arrayForPromo) {
+function applyPromotionsCart(cart) {
   // Apply promotions to each item in the array "cart"
 
-  for ( let i = 0; i < arrayForPromo.length; i++){
+  for ( let i = 0; i < cart.length; i++){
 
-    if (( arrayForPromo[i].id === 1 ) && ( arrayForPromo[i].quantity >= 3 )){
+    if ( cart[i].subtotalWithDiscount ) {
+
+      delete cart[i].subtotalWithDiscount;
+    }
+    
+    if (( cart[i].id === 1 ) && ( cart[i].quantity >= 3 )){
 
       let newPriceWithDiscountId1 = 10;
-      arrayForPromo[i].subtotalWithDiscount = newPriceWithDiscountId1 * arrayForPromo[i].quantity;
+      cart[i].subtotalWithDiscount = newPriceWithDiscountId1 * cart[i].quantity;
 
-    } else if (( arrayForPromo[i].id === 3 ) && ( arrayForPromo[i].quantity >= 10 )){
+    } else if (( cart[i].id === 3 ) && ( cart[i].quantity >= 10 )){
 
-        let newPriceWithDiscountId3 = (arrayForPromo[i].price * ( 2 / 3 )).toFixed(2);
-        arrayForPromo[i].subtotalWithDiscount = newPriceWithDiscountId3 * arrayForPromo[i].quantity;
+        let newPriceWithDiscountId3 = (cart[i].price * ( 2 / 3 )).toFixed(2);
+        cart[i].subtotalWithDiscount = newPriceWithDiscountId3 * cart[i].quantity;
 
     }
   }
@@ -203,15 +208,34 @@ function calculateTotal() {
 
 // Exercise 9
 function removeFromCart(id) {
-  /* Has de completar la funció removeFromCart(), la qual rep l'id del producte per al qual es deu decrementar la seva quantitat en una unitat.
 
-  Tingues en compte que si la quantitat del producte a decrementar és 1, has d'eliminar-lo del carret, no passar la seva quantitat a 0.
+  // Callback function to found product to decrease or delete
 
-  Recordar actualitzar les promocions. */
-
+  const productOnCart = cart => cart.id === id; 
 
 
+  // .findIndex(): Method to execute the callback function once for every index in the array until it finds the one where callbackFn returns a truthy value
+  
+  let i = cart.findIndex( productOnCart ); // Index in the array cart[] for the product to modify
+
+
+  // Search in the array cart[] for the product to modify
+
+  if ( cart[i].quantity == 1 ) {   // If there is only one unit in the cart the product should be removed
+
+    let removed = cart.splice(i,1);
+    console.log(removed);
+
+  } else {  // Instead the product should be modify their quantity and subtotal
+
+    cart[i].quantity -= 1;
+    cart[i].subtotal = cart[i].price * cart[i].quantity;
+  }
+
+  applyPromotionsCart(cart);
+  console.log(cart);
 }
+
 
 function open_modal() {
   console.log("Open Modal");
