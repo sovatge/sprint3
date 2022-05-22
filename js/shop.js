@@ -1,60 +1,3 @@
-// If you have time, you can move this variable "products" to a json or js file and load the data in this js. It will look more professional
-var products = [
-  {
-    id: 1,
-    name: "cooking oil",
-    price: 10.5,
-    type: "grocery",
-  },
-  {
-    id: 2,
-    name: "Pasta",
-    price: 6.25,
-    type: "grocery",
-  },
-  {
-    id: 3,
-    name: "Instant cupcake mixture",
-    price: 5,
-    type: "grocery",
-  },
-  {
-    id: 4,
-    name: "All-in-one",
-    price: 260,
-    type: "beauty",
-  },
-  {
-    id: 5,
-    name: "Zero Make-up Kit",
-    price: 20.5,
-    type: "beauty",
-  },
-  {
-    id: 6,
-    name: "Lip Tints",
-    price: 12.75,
-    type: "beauty",
-  },
-  {
-    id: 7,
-    name: "Lawn Dress",
-    price: 15,
-    type: "clothes",
-  },
-  {
-    id: 8,
-    name: "Lawn-Chiffon Combo",
-    price: 19.99,
-    type: "clothes",
-  },
-  {
-    id: 9,
-    name: "Toddler Frock",
-    price: 9.99,
-    type: "clothes",
-  },
-];
 // Array with products (objects) added directly with push(). Products in this array are repeated.
 var cartList = [];
 
@@ -64,7 +7,7 @@ var cart = [];
 var total = 0;
 
 // Exercise 1
-function buy(referenceId) {
+/* function buy(referenceId) {
   // 1. Loop for to the array products to get the item to add to cart
 
   let productToAdd;
@@ -80,17 +23,17 @@ function buy(referenceId) {
   cartList.push(productToAdd);
   console.log(cartList);
   
-}
+} */
 
 // Exercise 2
-function cleanCart() {
+/* function cleanCart() {
   
   cartList = [];
   console.log(cartList);
-}
+} */
 
 // Exercise 3
-function calculateTotal() {
+/* function calculateTotal() {
   // Calculate total price of the cart using the "cartList" array
 
   var totalImport = 0;
@@ -101,10 +44,10 @@ function calculateTotal() {
   }
 
   console.log(`total import of cart: ${totalImport}`);
-}
+} */
 
 // Exercise 4
-function generateCart(arrayToOptimize) {
+/* function generateCart(arrayToOptimize) {
   // Using the "cartlist" array that contains all the items in the shopping cart,
   // generate the "cart" array that does not contain repeated items, instead each item of this array "cart" shows the quantity of product.
 
@@ -149,7 +92,7 @@ function generateCart(arrayToOptimize) {
 
   applyPromotionsCart(cart);
   console.log(cart);
-}
+} */
 
 // Exercise 5
 function applyPromotionsCart(arrayForPromo) {
@@ -202,16 +145,61 @@ function addToCart(id) {
   // 1. Loop for to the array products to get the item to add to cart
   // 2. Add found product to the cart array or update its quantity in case it has been added previously.
 
-  /* Repassant el programa, es poden mantenir les funcionalitats simplificant el codi: això es diu fer un refactor.
+  // Callback function to found product to add or modify
 
-  Podem deixar d'usar buy() i generateCart() (no els esborris, per a facilitar la correcció), per a generar el carretó en una única funció addToCart().
-
-  A vegades és una mica tediós refactoritzar codi, ja que hauràs de modificar també calculateSubtotals, però s'ha d'anar netejant codi perquè sigui més mantenible.
-
-  Ajuda: Tingues en compte que has de validar si el producte ja existeix a l'array cart, per actualitzar la seva quantitat, o afegir-lo en cas que encara no formi part d'aquest array cart. */
+  const productOnCart = products => products.id === id; 
 
 
+  // .findIndex(): Method to execute the callback function once for every index in the array until it finds the one where callbackFn returns a truthy value
+  
+  let i = products.findIndex( productOnCart ); // Index in the array products[] for the product to add
+
+  let j = cart.findIndex( productOnCart ); // Index in the array cart[] for the product to modify
+
+
+
+  // Search in the array cart[] for the product to add
+
+  if ( j === -1 ) {   // -1 meaning the product isn't in the array cart, so it should be add
+
+    products[i].quantity = 1;
+    products[i].subtotal = products[i].price * products[i].quantity;
+    cart.push(products[i]);
+
+  } else {  // Instead the product should be modify because it's already in the cart array
+
+    cart[j].quantity += 1;
+    cart[j].subtotal = cart[j].price * cart[j].quantity;
+  }
+
+
+  applyPromotionsCart(cart);
+  console.log(cart);
 }
+
+
+function cleanCart() {
+  
+  cart = [];
+  printCart();
+  console.log(cart);
+}
+
+
+function calculateTotal() {
+  // Calculate total price of the cart
+
+  var totalImport = 0;
+
+  for ( let i = 0; i < cart.length; i++) {
+
+    totalImport += cart[i].subtotal;
+  }
+
+  console.log(`total import of cart: ${totalImport}`);
+}
+
+
 
 // Exercise 9
 function removeFromCart(id) {
