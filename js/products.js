@@ -2,7 +2,7 @@
 var products = [
   {
     id: 1,
-    name: "cooking oil",
+    name: "Cooking oil",
     price: 10.5,
     type: "grocery",
   },
